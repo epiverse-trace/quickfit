@@ -1,14 +1,20 @@
-Package: readepi
-Title: Import Epidemiological Data into R
-Version: 0.0.1
-Authors@R: 
-    c(person("Thibaut", "Jombart", , "thibaut@data.org", role = c("aut", "cre")),
-      person("Avinash", "Laddha", , "avinash@data.org", role = c("aut")))
-Description: This package implements functions to read epidemiological data from health information systems.
+Package: quickfit
+Title: Fits and compares simple epidemiological and distribution models 
+Version: 0.0.0.9000
+Authors@R: c(
+    person(given = "Joshua W.", 
+           family = "Lambert",  
+           email = "joshua.lambert@lshtm.ac.uk", 
+           role = c("aut", "cre")),
+    person(given = "Adam", 
+           family = "Kucharski", 
+           email = "adam.kucharski@lshtm.ac.uk", 
+           role = c("aut")))
+Description: Fit one and two parameter models via maximum likelihood.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Imports:
     checkmate
 Suggests: 
