@@ -14,7 +14,7 @@ goodness_of_fit <- function(data, models) {
   fitdist <- vector("list", length(models))
   # fit distributions to data
   if (is.data.frame(data)) {
-    stop("goodness of fit cannot be computed for censorred data")
+    stop("goodness of fit cannot be computed for censored data")
   } else {
     fitdist <- lapply(
       models,

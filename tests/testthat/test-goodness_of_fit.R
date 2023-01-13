@@ -14,6 +14,6 @@ test_that("goodness_of_fit works as expected on data.frame", {
       data = data.frame(left = left, right = right),
       models = c("lnorm", "gamma", "weibull")
     ),
-    regexp = "goodness of fit cannot be computed for censorred data"
+    regexp = "goodness of fit cannot be computed for censored data"
   )
 })

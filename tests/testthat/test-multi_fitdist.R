@@ -8,7 +8,7 @@ test_that("multi_fitdist works as expected on vector", {
   expect_identical(ncol(res), 4L)
 })
 
-test_that("multi_fitdist works as expected on censorred data", {
+test_that("multi_fitdist works as expected on censored data", {
   # data from fitdistrplus
   data("salinity")
   res <- multi_fitdist(
