@@ -20,7 +20,8 @@ knitr::opts_chunk$set(
 
 # {{ packagename }}
 
-{{ packagename }} provides functions to ....
+{{ packagename }} provides functions to estimate one and two parameter functions
+via maximum likelihood
 
 <!-- badges: start -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -42,8 +43,44 @@ remotes::install_github("{{ gh_repo }}")
 
 ## Example
 
-These examples illustrate some of the current functionalities
+These examples illustrate some of the current functionalities:
 
+``` r
+library(quickfit)
+```
+
+Generate some simulated data, define a likelihood, then estimate MLE, 
+or MLE and 95% confidence interval based on profile likelihood:
+
+``` r
+sim_data <- rnorm(50, 4, 2)
+
+# Define likelihood function
+log_l <- function(x,a,b) dnorm(x, a, b, log = TRUE)
+
+# Estimate MLE
+estimate_MLE(log_l, sim_data, n_param = 2, a_inital = 3, b_initial = 1)
+
+# Estimate 95% CI based on profile likelihood
+calculate_profile(
+  log_l, 
+  data_in = sim_data, 
+  n_param = 2, 
+  a_initial = 3, 
+  b_initial = 1, 
+  precision = 0.01
+)
+```
+
+Additionally, multiple distribution models can be compared (for censored and 
+non-censored data).
+
+``` r
+multi_fitdist(
+  data = rlnorm(n = 100, meanlog = 1, sdlog = 1), 
+  models = c("lnorm", "gamma", "weibull")
+)
+```
 
 ## Development
 
@@ -61,8 +98,8 @@ Contributions are welcome via [pull requests](https://github.com/{{ gh_repo }}/p
 
 Contributors to the project include:
 
-* 
-* 
+* Joshua W. Lambert
+* Adam Kucharski
 
 ### Code of Conduct
 
