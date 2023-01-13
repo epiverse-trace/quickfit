@@ -6,4 +6,11 @@
 # * https://r-pkgs.org/tests.html
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
+# nolint start
+library(testthat)
+library(quickfit)
+library(fitdistrplus)
+library(coarseDataTools)
+# nolint end
 
+test_check("quickfit")
