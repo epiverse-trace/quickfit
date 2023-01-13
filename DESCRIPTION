@@ -12,11 +12,14 @@ Authors@R: c(
            role = c("aut")))
 Description: Fit one and two parameter models via maximum likelihood.
 License: MIT + file LICENSE
+URL: https://github.com/epiverse-trace/quickfit
+BugReports: https://github.com/epiverse-trace/quickfit/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
-    checkmate
+    fitdistrplus,
+    coarseDataTools
 Suggests: 
     covr,
     testthat (>= 3.0.0)
