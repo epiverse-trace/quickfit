@@ -10,7 +10,7 @@ test_that("multi_fitdist works as expected on vector", {
 
 test_that("multi_fitdist works as expected on censored data", {
   # data from fitdistrplus
-  data("salinity")
+  data("salinity", package = "fitdistrplus")
   res <- multi_fitdist(
     data = salinity,
     models = c("lnorm", "gamma", "weibull")
@@ -22,7 +22,7 @@ test_that("multi_fitdist works as expected on censored data", {
 
 test_that("multi_fitdist works as expected on vector", {
   # data from coarseDataTools
-  data("nycH1N1")
+  data("nycH1N1", package = "coarseDataTools")
   res <- multi_fitdist(
     data = nycH1N1,
     models = c("lnorm", "weibull")
