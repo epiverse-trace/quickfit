@@ -86,10 +86,28 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ℹ No downloads are needed</span></span>
-<span><span class="co">#&gt; ℹ No downloads are needed</span></span>
-<span><span class="co">#&gt; ✔ 1 pkg + 2 deps: kept 3 [12.1s]</span></span>
-<span><span class="co">#&gt; ✔ 1 pkg + 2 deps: kept 3 [12.1s]</span></span></code></pre></div>
+<span><span class="co">#&gt; → Will update 1 package.</span></span>
+<span><span class="co">#&gt; → Will update 1 package.</span></span>
+<span><span class="co">#&gt; → The package (0 B) is cached.</span></span>
+<span><span class="co">#&gt; → The package (0 B) is cached.</span></span>
+<span><span class="co">#&gt; + quickfit 0.0.0.9000 → 0.0.0.9000 👷🏿‍♀️🔧 (GitHub: 5d11e96)</span></span>
+<span><span class="co">#&gt; + quickfit 0.0.0.9000 → 0.0.0.9000 👷🏿‍♀️🔧 (GitHub: 5d11e96)</span></span>
+<span><span class="co">#&gt; ℹ No downloads are needed, 1 pkg is cached</span></span>
+<span><span class="co">#&gt; ℹ No downloads are needed, 1 pkg is cached</span></span>
+<span><span class="co">#&gt; ✔ Got quickfit 0.0.0.9000 (source) (27.92 kB)</span></span>
+<span><span class="co">#&gt; ✔ Got quickfit 0.0.0.9000 (source) (27.92 kB)</span></span>
+<span><span class="co">#&gt; ℹ Packaging quickfit 0.0.0.9000</span></span>
+<span><span class="co">#&gt; ℹ Packaging quickfit 0.0.0.9000</span></span>
+<span><span class="co">#&gt; ✔ Packaged quickfit 0.0.0.9000 (567ms)</span></span>
+<span><span class="co">#&gt; ✔ Packaged quickfit 0.0.0.9000 (567ms)</span></span>
+<span><span class="co">#&gt; ℹ Building quickfit 0.0.0.9000</span></span>
+<span><span class="co">#&gt; ℹ Building quickfit 0.0.0.9000</span></span>
+<span><span class="co">#&gt; ✔ Built quickfit 0.0.0.9000 (1.4s)</span></span>
+<span><span class="co">#&gt; ✔ Built quickfit 0.0.0.9000 (1.4s)</span></span>
+<span><span class="co">#&gt; ✔ Installed quickfit 0.0.0.9000 (github::epiverse-trace/quickfit@5d11e96) (41ms)</span></span>
+<span><span class="co">#&gt; ✔ Installed quickfit 0.0.0.9000 (github::epiverse-trace/quickfit@5d11e96) (41ms)</span></span>
+<span><span class="co">#&gt; ✔ 1 pkg + 12 deps: kept 10, upd 1, dld 1 (NA B) [14.6s]</span></span>
+<span><span class="co">#&gt; ✔ 1 pkg + 12 deps: kept 10, upd 1, dld 1 (NA B) [14.6s]</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
@@ -108,10 +126,10 @@
 <span><span class="fu"><a href="reference/estimate_mle.html">estimate_mle</a></span><span class="op">(</span><span class="va">log_l</span>, <span class="va">sim_data</span>, n_param <span class="op">=</span> <span class="fl">2</span>, a_initial <span class="op">=</span> <span class="fl">3</span>, b_initial <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $estimate</span></span>
 <span><span class="co">#&gt;        a        b </span></span>
-<span><span class="co">#&gt; 4.327078 1.782706 </span></span>
+<span><span class="co">#&gt; 4.103950 1.838315 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $log_likelihood</span></span>
-<span><span class="co">#&gt; [1] -99.85416</span></span>
+<span><span class="co">#&gt; [1] -101.392</span></span>
 <span></span>
 <span><span class="co"># Estimate 95% CI based on profile likelihood</span></span>
 <span><span class="fu"><a href="reference/calculate_profile.html">calculate_profile</a></span><span class="op">(</span></span>
@@ -124,11 +142,11 @@
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; $estimate</span></span>
 <span><span class="co">#&gt;        a        b </span></span>
-<span><span class="co">#&gt; 4.327078 1.782706 </span></span>
+<span><span class="co">#&gt; 4.103950 1.838315 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $profile_out</span></span>
 <span><span class="co">#&gt;       a1       a2       b1       b2 </span></span>
-<span><span class="co">#&gt; 3.818017 4.828017 1.481874 2.203870</span></span></code></pre></div>
+<span><span class="co">#&gt; 3.588357 4.628357 1.528099 2.272617</span></span></code></pre></div>
 <p>Additionally, multiple distribution models can be compared (for censored and non-censored data).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/multi_fitdist.html">multi_fitdist</a></span><span class="op">(</span></span>
@@ -136,9 +154,9 @@
 <span>  models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lnorm"</span>, <span class="st">"gamma"</span>, <span class="st">"weibull"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    models    loglik      aic      bic</span></span>
-<span><span class="co">#&gt; 1   lnorm -233.4841 470.9682 476.1786</span></span>
-<span><span class="co">#&gt; 2   gamma -243.1483 490.2967 495.5070</span></span>
-<span><span class="co">#&gt; 3 weibull -243.2092 490.4185 495.6288</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   lnorm -264.0081 532.0161 537.2265</span></span>
+<span><span class="co">#&gt; 2 weibull -272.9079 549.8158 555.0262</span></span>
+<span><span class="co">#&gt; 3   gamma -272.9284 549.8568 555.0672</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="help">Help<a class="anchor" aria-label="anchor" href="#help"></a>
