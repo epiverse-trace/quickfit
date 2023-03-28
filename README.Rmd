@@ -31,6 +31,11 @@ via maximum likelihood
 <!-- badges: end -->
 
 
+`{quickfit}` is an `R` package to help with simple model fitting tasks in epidemiology.
+
+`{quickfit}` is developed at the [Centre for the Mathematical Modelling of Infectious Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases) at the London School of Hygiene and Tropical Medicine as part of the [Epiverse Initiative](https://data.org/initiatives/epiverse/).
+
+
 ## Installation
 
 You can install the development version of {{ packagename }} from
