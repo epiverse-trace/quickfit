@@ -47,10 +47,28 @@ pak::pak("epiverse-trace/quickfit")
 #> 
 #>  
 #> 
-#> ℹ No downloads are needed
-#> ℹ No downloads are needed
-#> ✔ 1 pkg + 2 deps: kept 3 [12.1s]
-#> ✔ 1 pkg + 2 deps: kept 3 [12.1s]
+#> → Will update 1 package.
+#> → Will update 1 package.
+#> → The package (0 B) is cached.
+#> → The package (0 B) is cached.
+#> + quickfit 0.0.0.9000 → 0.0.0.9000 👷🏿‍♀️🔧 (GitHub: 5d11e96)
+#> + quickfit 0.0.0.9000 → 0.0.0.9000 👷🏿‍♀️🔧 (GitHub: 5d11e96)
+#> ℹ No downloads are needed, 1 pkg is cached
+#> ℹ No downloads are needed, 1 pkg is cached
+#> ✔ Got quickfit 0.0.0.9000 (source) (27.92 kB)
+#> ✔ Got quickfit 0.0.0.9000 (source) (27.92 kB)
+#> ℹ Packaging quickfit 0.0.0.9000
+#> ℹ Packaging quickfit 0.0.0.9000
+#> ✔ Packaged quickfit 0.0.0.9000 (567ms)
+#> ✔ Packaged quickfit 0.0.0.9000 (567ms)
+#> ℹ Building quickfit 0.0.0.9000
+#> ℹ Building quickfit 0.0.0.9000
+#> ✔ Built quickfit 0.0.0.9000 (1.4s)
+#> ✔ Built quickfit 0.0.0.9000 (1.4s)
+#> ✔ Installed quickfit 0.0.0.9000 (github::epiverse-trace/quickfit@5d11e96) (41ms)
+#> ✔ Installed quickfit 0.0.0.9000 (github::epiverse-trace/quickfit@5d11e96) (41ms)
+#> ✔ 1 pkg + 12 deps: kept 10, upd 1, dld 1 (NA B) [14.6s]
+#> ✔ 1 pkg + 12 deps: kept 10, upd 1, dld 1 (NA B) [14.6s]
 ```
 
 ## Quick start
@@ -74,10 +92,10 @@ log_l <- function(x,a,b) dnorm(x, a, b, log = TRUE)
 estimate_mle(log_l, sim_data, n_param = 2, a_initial = 3, b_initial = 1)
 #> $estimate
 #>        a        b 
-#> 4.327078 1.782706 
+#> 4.103950 1.838315 
 #> 
 #> $log_likelihood
-#> [1] -99.85416
+#> [1] -101.392
 
 # Estimate 95% CI based on profile likelihood
 calculate_profile(
@@ -90,11 +108,11 @@ calculate_profile(
 )
 #> $estimate
 #>        a        b 
-#> 4.327078 1.782706 
+#> 4.103950 1.838315 
 #> 
 #> $profile_out
 #>       a1       a2       b1       b2 
-#> 3.818017 4.828017 1.481874 2.203870
+#> 3.588357 4.628357 1.528099 2.272617
 ```
 
 Additionally, multiple distribution models can be compared (for censored
@@ -106,9 +124,9 @@ multi_fitdist(
   models = c("lnorm", "gamma", "weibull")
 )
 #>    models    loglik      aic      bic
-#> 1   lnorm -233.4841 470.9682 476.1786
-#> 2   gamma -243.1483 490.2967 495.5070
-#> 3 weibull -243.2092 490.4185 495.6288
+#> 1   lnorm -264.0081 532.0161 537.2265
+#> 2 weibull -272.9079 549.8158 555.0262
+#> 3   gamma -272.9284 549.8568 555.0672
 ```
 
 ## Help
