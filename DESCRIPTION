@@ -1,5 +1,5 @@
 Package: quickfit
-Title: Fits and compares simple epidemiological and distribution models 
+Title: Utility functions for fitting and comparing simple epidemiological models 
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Joshua W.", 
@@ -10,7 +10,7 @@ Authors@R: c(
            family = "Kucharski", 
            email = "adam.kucharski@lshtm.ac.uk", 
            role = c("aut")))
-Description: Fit one and two parameter models via maximum likelihood.
+Description: Model fitting utilities package for Epiverse-TRACE.
 License: MIT + file LICENSE
 URL: https://github.com/epiverse-trace/quickfit
 BugReports: https://github.com/epiverse-trace/quickfit/issues
