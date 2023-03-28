@@ -21,6 +21,15 @@ coverage](https://codecov.io/gh/epiverse-trace/quickfit/branch/main/graph/badge.
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
+`{quickfit}` is an `R` package to help with simple model fitting tasks
+in epidemiology.
+
+`{quickfit}` is developed at the [Centre for the Mathematical Modelling
+of Infectious
+Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases)
+at the London School of Hygiene and Tropical Medicine as part of the
+[Epiverse Initiative](https://data.org/initiatives/epiverse/).
+
 ## Installation
 
 You can install the development version of quickfit from
@@ -38,40 +47,10 @@ pak::pak("epiverse-trace/quickfit")
 #> 
 #>  
 #> 
-#> → Will install 3 packages.
-#> → Will install 3 packages.
-#> → Will download 2 CRAN packages (793.30 kB), cached: 1 (0 B).
-#> → Will download 2 CRAN packages (793.30 kB), cached: 1 (0 B).
-#> + backports   1.4.1  ⬇ (98.74 kB)
-#> + checkmate   2.1.0  ⬇ (694.55 kB)
-#> + readepi     0.0.1 👷🏾‍♀️🔧 (GitHub: 6707090)
-#> + backports   1.4.1  ⬇ (98.74 kB)
-#> + checkmate   2.1.0  ⬇ (694.55 kB)
-#> + readepi     0.0.1 👷🏾‍♀️🔧 (GitHub: 6707090)
-#> ℹ Getting 2 pkgs (793.30 kB), 1 cached
-#> ℹ Getting 2 pkgs (793.30 kB), 1 cached
-#> ✔ Got backports 1.4.1 (x86_64-apple-darwin17.0) (98.74 kB)
-#> ✔ Got backports 1.4.1 (x86_64-apple-darwin17.0) (98.74 kB)
-#> ✔ Got checkmate 2.1.0 (x86_64-apple-darwin17.0) (694.55 kB)
-#> ✔ Got checkmate 2.1.0 (x86_64-apple-darwin17.0) (694.55 kB)
-#> ✔ Got readepi 0.0.1 (source) (15.63 kB)
-#> ✔ Got readepi 0.0.1 (source) (15.63 kB)
-#> ✔ Installed backports 1.4.1  (65ms)
-#> ✔ Installed backports 1.4.1  (65ms)
-#> ✔ Installed checkmate 2.1.0  (351ms)
-#> ✔ Installed checkmate 2.1.0  (351ms)
-#> ℹ Packaging readepi 0.0.1
-#> ℹ Packaging readepi 0.0.1
-#> ✔ Packaged readepi 0.0.1 (1s)
-#> ✔ Packaged readepi 0.0.1 (1s)
-#> ℹ Building readepi 0.0.1
-#> ℹ Building readepi 0.0.1
-#> ✔ Built readepi 0.0.1 (1.5s)
-#> ✔ Built readepi 0.0.1 (1.5s)
-#> ✔ Installed readepi 0.0.1 (github::epiverse-trace/quickfit@6707090) (31ms)
-#> ✔ Installed readepi 0.0.1 (github::epiverse-trace/quickfit@6707090) (31ms)
-#> ✔ 1 pkg + 2 deps: added 3, dld 3 (NA B) [13.3s]
-#> ✔ 1 pkg + 2 deps: added 3, dld 3 (NA B) [13.3s]
+#> ℹ No downloads are needed
+#> ℹ No downloads are needed
+#> ✔ 1 pkg + 2 deps: kept 3 [12.1s]
+#> ✔ 1 pkg + 2 deps: kept 3 [12.1s]
 ```
 
 ## Quick start
@@ -95,10 +74,10 @@ log_l <- function(x,a,b) dnorm(x, a, b, log = TRUE)
 estimate_mle(log_l, sim_data, n_param = 2, a_initial = 3, b_initial = 1)
 #> $estimate
 #>        a        b 
-#> 4.264514 1.953023 
+#> 4.327078 1.782706 
 #> 
 #> $log_likelihood
-#> [1] -104.418
+#> [1] -99.85416
 
 # Estimate 95% CI based on profile likelihood
 calculate_profile(
@@ -111,11 +90,11 @@ calculate_profile(
 )
 #> $estimate
 #>        a        b 
-#> 4.264514 1.953023 
+#> 4.327078 1.782706 
 #> 
 #> $profile_out
 #>       a1       a2       b1       b2 
-#> 3.714837 4.814837 1.623450 2.414425
+#> 3.818017 4.828017 1.481874 2.203870
 ```
 
 Additionally, multiple distribution models can be compared (for censored
@@ -127,9 +106,9 @@ multi_fitdist(
   models = c("lnorm", "gamma", "weibull")
 )
 #>    models    loglik      aic      bic
-#> 1   lnorm -258.6797 521.3593 526.5697
-#> 2 weibull -271.7130 547.4260 552.6363
-#> 3   gamma -277.1335 558.2671 563.4774
+#> 1   lnorm -233.4841 470.9682 476.1786
+#> 2   gamma -243.1483 490.2967 495.5070
+#> 3 weibull -243.2092 490.4185 495.6288
 ```
 
 ## Help
