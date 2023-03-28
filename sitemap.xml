@@ -16,9 +16,27 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/calc_aic.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calc_bic.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calculate_profile.html</loc>
+  </url>
+  <url>
+    <loc>/reference/estimate_mle.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fit_cdt_dist.html</loc>
+  </url>
+  <url>
+    <loc>/reference/goodness_of_fit.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/read_stuff.html</loc>
+    <loc>/reference/multi_fitdist.html</loc>
   </url>
 </urlset>
