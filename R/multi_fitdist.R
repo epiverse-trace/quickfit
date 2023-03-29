@@ -1,9 +1,25 @@
-#' Maximum likelihood fitting of multiple distributions
+#' Helper function to call a fitting function across different models
 #'
-#' @param data A numeric vector of values
+#' @description This is a utility function which executes a function provided on
+#' the data provided and over all models specified. The function then organises
+#' the output and calculates the AIC and BIC and ranks the output by model fit
+#' which is determined by the `rank_by` argument.
+#'
+#' @details The vector of models given in the `models` argument needs to be
+#' named with the name of the model argument in the supplied function when it
+#' is not the second argument in that function. All elements of the vector need
+#' to be named, see example.
+#'
+#' The data is assumed to always be the first argument of the function supplied
+#' in `func`, `multi_fitdist()` will not work correct if this is not the case.
+#'
+#' @param data A vector or data frame containing data that is required by the
+#' function specified in `func` argument.
 #' @param models A character string or vector of character strings
-#' specifying the names of the candidate models. This follows the R naming
-#' convention for distributions, the density function is `d[name]`.
+#' specifying the names of the candidate models. The naming of the models
+#' should match those required by the function specified in the `func` argument.
+#' The vector of models should be named with the name of the model argument
+#' from the input function when the argument is not second. See details.
 #' @param func A function (`closure`) used to fit the models.
 #' @param rank_by A character string, either "loglik", "aic" or "bic" to rank
 #' the order of the output data frame. Default is "aic".
@@ -15,7 +31,15 @@
 #' \dontrun{
 #' multi_fitdist(
 #'   data = rgamma(n = 100, shape = 1, scale = 1),
-#'   models = c("gamma", "weibull", "lnorm")
+#'   models = c("gamma", "weibull", "lnorm"),
+#'   func = fitdistrplus::fitdist
+#' )
+#'
+#' # example where the models are named for when the model is not the second
+#' # argument of the function input
+#' multi_fitdist(
+#'   data = rgamma(n = 100, shape = 1, scale = 1),
+#'   models = c(distr = "gamma", distr = "weibull", distr = "lnorm"),
 #'   func = fitdistrplus::fitdist
 #' )
 #' }
@@ -88,12 +112,11 @@ multi_fitdist <- function(data,
   res
 }
 
-#' Calculates the Akaike information criterion for the loglikelihood of a two
-#' parameter probability distribution
+#' Calculates the Akaike information criterion
 #'
 #' @param loglik A vector or single number the loglikelihood of the model
 #' @param df A numeric specifying the degrees of freedom for the model in order
-#' to calculate the Akaike information criterion
+#' to calculate the Akaike information criterion. Default is 2.
 #'
 #' @return A single or vector of numerics equal to the input vector length
 #' @export
@@ -112,8 +135,7 @@ calc_aic <- function(loglik, df = 2) {
   stats::AIC(loglik)
 }
 
-#' Calculates the Bayesian information criterion for the loglikelihood of a two
-#' parameter probability distribution
+#' Calculates the Bayesian information criterion
 #'
 #' @inheritParams calc_aic
 #' @inheritParams multi_fitdist

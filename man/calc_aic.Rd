@@ -2,8 +2,7 @@
 % Please edit documentation in R/multi_fitdist.R
 \name{calc_aic}
 \alias{calc_aic}
-\title{Calculates the Akaike information criterion for the loglikelihood of a two
-parameter probability distribution}
+\title{Calculates the Akaike information criterion}
 \usage{
 calc_aic(loglik, df = 2)
 }
@@ -11,14 +10,13 @@ calc_aic(loglik, df = 2)
 \item{loglik}{A vector or single number the loglikelihood of the model}
 
 \item{df}{A numeric specifying the degrees of freedom for the model in order
-to calculate the Akaike information criterion}
+to calculate the Akaike information criterion. Default is 2.}
 }
 \value{
 A single or vector of numerics equal to the input vector length
 }
 \description{
-Calculates the Akaike information criterion for the loglikelihood of a two
-parameter probability distribution
+Calculates the Akaike information criterion
 }
 \examples{
 calc_aic(loglik = -110)

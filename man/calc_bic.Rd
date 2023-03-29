@@ -2,25 +2,24 @@
 % Please edit documentation in R/multi_fitdist.R
 \name{calc_bic}
 \alias{calc_bic}
-\title{Calculates the Bayesian information criterion for the loglikelihood of a two
-parameter probability distribution}
+\title{Calculates the Bayesian information criterion}
 \usage{
 calc_bic(loglik, data, df = 2)
 }
 \arguments{
 \item{loglik}{A vector or single number the loglikelihood of the model}
 
-\item{data}{A numeric vector of values}
+\item{data}{A vector or data frame containing data that is required by the
+function specified in \code{func} argument.}
 
 \item{df}{A numeric specifying the degrees of freedom for the model in order
-to calculate the Akaike information criterion}
+to calculate the Akaike information criterion. Default is 2.}
 }
 \value{
 A single or vector of numerics equal to the input vector length
 }
 \description{
-Calculates the Bayesian information criterion for the loglikelihood of a two
-parameter probability distribution
+Calculates the Bayesian information criterion
 }
 \examples{
 # example using vector
