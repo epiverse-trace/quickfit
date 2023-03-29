@@ -4,100 +4,84 @@
 #' @param models A character string or vector of character strings
 #' specifying the names of the candidate models. This follows the R naming
 #' convention for distributions, the density function is `d[name]`.
+#' @param func A function (`closure`) used to fit the models.
+#' @param rank_by A character string, either "loglik", "aic" or "bic" to rank
+#' the order of the output data frame. Default is "aic".
 #'
 #' @return A data frame of all models
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' multi_fitdist(
 #'   data = rgamma(n = 100, shape = 1, scale = 1),
 #'   models = c("gamma", "weibull", "lnorm")
+#'   func = fitdistrplus::fitdist
 #' )
-multi_fitdist <- function(data, models) {
+#' }
+multi_fitdist <- function(data,
+                          models,
+                          func,
+                          rank_by = c("aic", "bic", "loglik")) {
 
-  # fit distributions to data
-  if (is.data.frame(data)) {
-    if (ncol(data) == 2) {
-      res <- lapply(
-        models,
-        fitdistrplus::fitdistcens,
-        censdata = data
+  # check input
+  func <- match.fun(func)
+  rank_by <- match.arg(rank_by)
+
+  # try and call function input with args
+  tryCatch(
+    {
+      res <- vector("list", length = length(models))
+      for (i in seq_along(models)) {
+        args <- list(data, models[i])
+        if (!is.null(names(models[i]))) {
+          arg_names <- lapply(args, names)
+          names(args)[2] <- arg_names[2]
+          names(args)[1] <- ""
+        }
+        res[[i]] <- do.call(func, args = args)
+      }
+    },
+    error = function(cnd) {
+      message(
+        "Failed to fit models to data please check input \n",
+        "See documentation of input function for further details"
       )
-    } else {
-      res <- fit_cdt_dist(data = data, models = models)
-      # data is formatted in fit_cdt_dist so return early
-      return(res)
+      return(NA)
     }
+  )
+
+  # check whether the list contains s3 or s4 objects
+  is_res_s4 <- all(sapply(res, isS4))
+
+  name_accessor <- ifelse(
+    test = is_res_s4,
+    yes = methods::slotNames,
+    no = names
+  )
+  slot_accessor <- ifelse(test = is_res_s4, yes = "slot", no = "[[")
+
+  # check if function output contains loglikelihood
+  res_names <- lapply(res, name_accessor)
+  has_loglik <- sapply(res_names, function(x) "loglik" %in% x)
+
+  # extract loglikelihood
+  if (all(has_loglik)) {
+    loglik <- vapply(res, slot_accessor, "loglik", FUN.VALUE = numeric(1))
+    aic <- calc_aic(loglik = loglik)
+    bic <- calc_bic(loglik = loglik, data = data)
   } else {
-    res <- lapply(
-      models,
-      fitdistrplus::fitdist,
-      data = data
+    stop(
+      "Fitting function input does not have loglik in output",
+      call. = FALSE
     )
   }
 
-  # extract loglikelihood, aic and bic
-  loglik <- vapply(res, "[[", "loglik", FUN.VALUE = numeric(1))
-  aic <- vapply(res, "[[", "aic", FUN.VALUE = numeric(1))
-  bic <- vapply(res, "[[", "bic", FUN.VALUE = numeric(1))
-
   # package results into data frame
   res <- data.frame(models = models, loglik = loglik, aic = aic, bic = bic)
 
   # order the results from best fit to worst
-  res <- res[order(res$aic, method = "radix"), ]
-  rownames(res) <- NULL
-
-  # return results
-  res
-}
-
-#' Fits probability distributions using `coarseDataTools::dic.fit()`
-#'
-#' @inheritParams multi_fitdist
-#'
-#' @return A data frame of all models
-#' @export
-#'
-#' @examples
-#' library(coarseDataTools)
-#' data("nycH1N1")
-#' fit_cdt_dist(data = nycH1N1, models = c("lnorm", "weibull"))
-fit_cdt_dist <- function(data, models) {
-
-  # convert models to format accepted by dic.fit()
-  models <- gsub(pattern = "lnorm", replacement = "L", x = models, fixed = TRUE)
-  models <- gsub(pattern = "gamma", replacement = "G", x = models, fixed = TRUE)
-  models <- gsub(
-    pattern = "weibull", replacement = "W", x = models, fixed = TRUE
-  )
-
-  fitdist <- lapply(models, function(x, data) {
-    if (x == "G") {
-      # gamma distribution fitting requires bootstrapping
-      coarseDataTools::dic.fit(dat = data, dist = x, n.boots = 100)
-    } else {
-      coarseDataTools::dic.fit(dat = data, dist = x)
-    }
-  }, data)
-
-  # extract loglikelihood
-  loglik <- vapply(fitdist, "slot", "loglik", FUN.VALUE = numeric(1))
-
-  # calculate aic and bic
-  aic <- calc_aic(loglik)
-  bic <- calc_bic(loglik, data)
-
-  # change models back to original
-  models <- gsub(pattern = "^L$", replacement = "lnorm", x = models)
-  models <- gsub(pattern = "^G$", replacement = "gamma", x = models)
-  models <- gsub(pattern = "^W$", replacement = "weibull", x = models)
-
-  # package results into data frame
-  res <- data.frame(models = models, loglik = loglik, aic = aic, bic = bic)
-
-  # order the results from best fit to worst
-  res <- res[order(res$aic, method = "radix"), ]
+  res <- res[order(res[, rank_by], method = "radix"), ]
   rownames(res) <- NULL
 
   # return results
