@@ -4,7 +4,7 @@
 \alias{multi_fitdist}
 \title{Maximum likelihood fitting of multiple distributions}
 \usage{
-multi_fitdist(data, models)
+multi_fitdist(data, models, func, rank_by = c("aic", "bic", "loglik"))
 }
 \arguments{
 \item{data}{A numeric vector of values}
@@ -12,6 +12,11 @@ multi_fitdist(data, models)
 \item{models}{A character string or vector of character strings
 specifying the names of the candidate models. This follows the R naming
 convention for distributions, the density function is \code{d[name]}.}
+
+\item{func}{A function (\code{closure}) used to fit the models.}
+
+\item{rank_by}{A character string, either "loglik", "aic" or "bic" to rank
+the order of the output data frame. Default is "aic".}
 }
 \value{
 A data frame of all models
@@ -20,8 +25,11 @@ A data frame of all models
 Maximum likelihood fitting of multiple distributions
 }
 \examples{
+\dontrun{
 multi_fitdist(
   data = rgamma(n = 100, shape = 1, scale = 1),
   models = c("gamma", "weibull", "lnorm")
+  func = fitdistrplus::fitdist
 )
+}
 }
