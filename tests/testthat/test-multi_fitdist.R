@@ -52,11 +52,14 @@ test_that("multi_fitdist works as expected on vector", {
            10, 14, 11, 12, 12, 11, 10, 12, 11, 13, 11, 13, 11, 12),
     type = rep(0, 30)
   )
-  res <- multi_fitdist(
-    data = data,
-    models = c(dist = "L", dist = "W"), # nolint
-    func = coarseDataTools::dic.fit
-  )
+  # suppress warning produced by supplied function
+  capture.output(res <- suppressWarnings(
+    multi_fitdist(
+      data = data,
+      models = c(dist = "L", dist = "W"), # nolint
+      func = coarseDataTools::dic.fit
+    )
+  ))
   expect_s3_class(res, "data.frame")
   expect_identical(nrow(res), 2L)
   expect_identical(ncol(res), 4L)
