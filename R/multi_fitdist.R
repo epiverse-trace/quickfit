@@ -108,19 +108,21 @@ fit_cdt_dist <- function(data, models) {
 #' parameter probability distribution
 #'
 #' @param loglik A vector or single number the loglikelihood of the model
+#' @param df A numeric specifying the degrees of freedom for the model in order
+#' to calculate the Akaike information criterion
 #'
 #' @return A single or vector of numerics equal to the input vector length
 #' @export
 #'
 #' @examples
 #' calc_aic(loglik = -110)
-calc_aic <- function(loglik) {
+calc_aic <- function(loglik, df = 2) {
 
   # make loglik a logLik class for AIC method
   class(loglik) <- "logLik"
 
   # set degrees of freedom (TODO: allow df to change)
-  attr(loglik, "df") <- 2
+  attr(loglik, "df") <- df
 
   # calculate and return AIC
   stats::AIC(loglik)
