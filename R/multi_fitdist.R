@@ -136,21 +136,32 @@ calc_aic <- function(loglik) {
 #' @export
 #'
 #' @examples
-#' library(coarseDataTools)
-#' data("nycH1N1")
-#' calc_bic(loglik = -110, data = nycH1N1)
-calc_bic <- function(loglik, data) {
+#' # example using vector
+#' data <- c(2, 13, 22, 25, 11, 12, 11, 23, 13, 24)
+#' calc_bic(loglik = -110, data = data)
+#'
+#' # example using tabular data
+#' data <- data.frame(
+#'   c(2, 13, 22, 25, 11, 12, 11, 23, 13, 24),
+#'   c(4, 15, 19, 1, 16, 10, 3, 17, 16, 3)
+#' )
+#' calc_bic(loglik = -110, data = data)
+calc_bic <- function(loglik, data, df = 2) {
 
   # make loglik a logLik class for BIC method
   class(loglik) <- "logLik"
 
   # set degrees of freedom (TODO: allow df to change)
-  attr(loglik, "df") <- 2
+  attr(loglik, "df") <- df
 
   # set number of observations
-  attr(loglik, "nobs") <- nrow(data)
+  if (is.null(dim(data))) {
+    attr(loglik, "nobs") <- length(data)
+  } else {
+    # tabular data is assumed to have one obs per row
+    attr(loglik, "nobs") <- dim(data)[1L]
+  }
 
   # calculate and return BIC
   stats::BIC(loglik)
-
 }

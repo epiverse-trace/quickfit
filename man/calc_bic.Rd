@@ -5,12 +5,15 @@
 \title{Calculates the Bayesian information criterion for the loglikelihood of a two
 parameter probability distribution}
 \usage{
-calc_bic(loglik, data)
+calc_bic(loglik, data, df = 2)
 }
 \arguments{
 \item{loglik}{A vector or single number the loglikelihood of the model}
 
 \item{data}{A numeric vector of values}
+
+\item{df}{A numeric specifying the degrees of freedom for the model in order
+to calculate the Akaike information criterion}
 }
 \value{
 A single or vector of numerics equal to the input vector length
@@ -20,7 +23,14 @@ Calculates the Bayesian information criterion for the loglikelihood of a two
 parameter probability distribution
 }
 \examples{
-library(coarseDataTools)
-data("nycH1N1")
-calc_bic(loglik = -110, data = nycH1N1)
+# example using vector
+data <- c(2, 13, 22, 25, 11, 12, 11, 23, 13, 24)
+calc_bic(loglik = -110, data = data)
+
+# example using tabular data
+data <- data.frame(
+  c(2, 13, 22, 25, 11, 12, 11, 23, 13, 24),
+  c(4, 15, 19, 1, 16, 10, 3, 17, 16, 3)
+)
+calc_bic(loglik = -110, data = data)
 }
