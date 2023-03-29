@@ -18,8 +18,8 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
-    fitdistrplus,
-    coarseDataTools
+    methods,
+    stats
 Suggests: 
     covr,
     testthat (>= 3.0.0)
