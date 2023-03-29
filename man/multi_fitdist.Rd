@@ -2,16 +2,19 @@
 % Please edit documentation in R/multi_fitdist.R
 \name{multi_fitdist}
 \alias{multi_fitdist}
-\title{Maximum likelihood fitting of multiple distributions}
+\title{Helper function to call a fitting function across different models}
 \usage{
 multi_fitdist(data, models, func, rank_by = c("aic", "bic", "loglik"))
 }
 \arguments{
-\item{data}{A numeric vector of values}
+\item{data}{A vector or data frame containing data that is required by the
+function specified in \code{func} argument.}
 
 \item{models}{A character string or vector of character strings
-specifying the names of the candidate models. This follows the R naming
-convention for distributions, the density function is \code{d[name]}.}
+specifying the names of the candidate models. The naming of the models
+should match those required by the function specified in the \code{func} argument.
+The vector of models should be named with the name of the model argument
+from the input function when the argument is not second. See details.}
 
 \item{func}{A function (\code{closure}) used to fit the models.}
 
@@ -22,13 +25,33 @@ the order of the output data frame. Default is "aic".}
 A data frame of all models
 }
 \description{
-Maximum likelihood fitting of multiple distributions
+This is a utility function which executes a function provided on
+the data provided and over all models specified. The function then organises
+the output and calculates the AIC and BIC and ranks the output by model fit
+which is determined by the \code{rank_by} argument.
+}
+\details{
+The vector of models given in the \code{models} argument needs to be
+named with the name of the model argument in the supplied function when it
+is not the second argument in that function. All elements of the vector need
+to be named, see example.
+
+The data is assumed to always be the first argument of the function supplied
+in \code{func}, \code{multi_fitdist()} will not work correct if this is not the case.
 }
 \examples{
 \dontrun{
 multi_fitdist(
   data = rgamma(n = 100, shape = 1, scale = 1),
-  models = c("gamma", "weibull", "lnorm")
+  models = c("gamma", "weibull", "lnorm"),
+  func = fitdistrplus::fitdist
+)
+
+# example where the models are named for when the model is not the second
+# argument of the function input
+multi_fitdist(
+  data = rgamma(n = 100, shape = 1, scale = 1),
+  models = c(distr = "gamma", distr = "weibull", distr = "lnorm"),
   func = fitdistrplus::fitdist
 )
 }
