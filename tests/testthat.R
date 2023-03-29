@@ -9,8 +9,6 @@
 # nolint start
 library(testthat)
 library(quickfit)
-library(fitdistrplus)
-library(coarseDataTools)
 # nolint end
 
 test_check("quickfit")
