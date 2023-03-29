@@ -5,10 +5,13 @@
 \title{Calculates the Akaike information criterion for the loglikelihood of a two
 parameter probability distribution}
 \usage{
-calc_aic(loglik)
+calc_aic(loglik, df = 2)
 }
 \arguments{
 \item{loglik}{A vector or single number the loglikelihood of the model}
+
+\item{df}{A numeric specifying the degrees of freedom for the model in order
+to calculate the Akaike information criterion}
 }
 \value{
 A single or vector of numerics equal to the input vector length
