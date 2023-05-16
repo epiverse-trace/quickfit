@@ -35,7 +35,7 @@
 #'   func = fitdistrplus::fitdist
 #' )
 #'
-#' # example where the models are named for when the model is not the second
+#' # Where the model is not the second argument in the function specified, the models have to be named according to what they are called in the original function.
 #' # argument of the function input
 #' multi_fitdist(
 #'   data = rgamma(n = 100, shape = 1, scale = 1),
