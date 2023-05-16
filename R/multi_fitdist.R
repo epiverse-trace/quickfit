@@ -36,7 +36,7 @@
 #' )
 #'
 #' # Where the model is not the second argument in the function specified, the models have to be named according to what they are called in the original function.
-#' # argument of the function input
+#' # argument of the function input. Here, `distr` is the name required in `fitdistrplus::fitdist()`
 #' multi_fitdist(
 #'   data = rgamma(n = 100, shape = 1, scale = 1),
 #'   models = c(distr = "gamma", distr = "weibull", distr = "lnorm"),
