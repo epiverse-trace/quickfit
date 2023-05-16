@@ -24,7 +24,7 @@
 #' @param rank_by A character string, either "loglik", "aic" or "bic" to rank
 #' the order of the output data frame. Default is "aic".
 #'
-#' @return A data frame of all models
+#' @return A data frame containing the models and associated loglikelihood, aic, and bic. 
 #' @export
 #'
 #' @examples
