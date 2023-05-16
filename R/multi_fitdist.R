@@ -3,7 +3,7 @@
 #' @description This is a utility function that allows comparing different model fits to a single dataset. It does this by executing a specified function on
 #' the data provided and over all models specified. The function then organises
 #' the output and calculates the AIC and BIC and ranks the output by model fit
-#' which is determined by the `rank_by` argument.
+#' , determined by the `rank_by` argument.
 #'
 #' @details The vector of models given in the `models` argument needs to be
 #' named with the name of the model argument supplied to `func` when it
