@@ -11,7 +11,7 @@
 #' to be named, see example.
 #'
 #' The data is assumed to always be the first argument of the function supplied
-#' in `func`, `multi_fitdist()` will not work correct if this is not the case.
+#' in `func`, `multi_fitdist()` will not work correctly if this is not the case.
 #'
 #' @param data A vector or data frame containing data that is required by the
 #' function specified in `func` argument.
