@@ -19,7 +19,7 @@
 #' specifying the names of the candidate models. The naming of the models
 #' should match those required by the function specified in the `func` argument.
 #' The vector of models should be named with the name of the model argument
-#' from the input function when the argument is not second. See details.
+#' from that specified in `func` when the argument is not second. See details.
 #' @param func A function (`closure`) used to fit the models.
 #' @param rank_by A character string, either "loglik", "aic" or "bic" to rank
 #' the order of the output data frame. Default is "aic".
