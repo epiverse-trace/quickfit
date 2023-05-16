@@ -6,7 +6,7 @@
 #' which is determined by the `rank_by` argument.
 #'
 #' @details The vector of models given in the `models` argument needs to be
-#' named with the name of the model argument in the supplied function when it
+#' named with the name of the model argument supplied to `func` when it
 #' is not the second argument in that function. All elements of the vector need
 #' to be named, see example.
 #'
