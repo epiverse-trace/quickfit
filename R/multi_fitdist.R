@@ -76,7 +76,7 @@ multi_fitdist <- function(data,
   )
 
   # check whether the list contains s3 or s4 objects
-  is_res_s4 <- all(sapply(res, isS4))
+ is_res_s4 <- all(vapply(res, isS4, FUN.VALUE = logical(1))
 
   name_accessor <- ifelse(
     test = is_res_s4,
