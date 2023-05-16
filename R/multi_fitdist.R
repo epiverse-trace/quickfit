@@ -87,7 +87,7 @@ multi_fitdist <- function(data,
 
   # check if function output contains loglikelihood
   res_names <- lapply(res, name_accessor)
-  has_loglik <- sapply(res_names, function(x) "loglik" %in% x)
+  has_loglik <- vapply(res_names, function(x) "loglik" %in% x, FUN.VALUE = logical(1))
 
   # extract loglikelihood
   if (all(has_loglik)) {
