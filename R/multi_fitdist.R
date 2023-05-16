@@ -20,7 +20,7 @@
 #' should match those required by the function specified in the `func` argument.
 #' The vector of models should be named with the name of the model argument
 #' from that specified in `func` when the argument is not second. See details.
-#' @param func A function (`closure`) used to fit the models.
+#' @param func A function (`closure`) used to fit the models. Could be user-defined or specified from another package's namespace.
 #' @param rank_by A character string, either "loglik", "aic" or "bic" to rank
 #' the order of the output data frame. Default is "aic".
 #'
