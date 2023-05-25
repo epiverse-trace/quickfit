@@ -7,9 +7,6 @@
 
 # quickfit
 
-quickfit provides functions to estimate one and two parameter functions
-via maximum likelihood
-
 <!-- badges: start -->
 
 [![License:
@@ -62,10 +59,10 @@ log_l <- function(x,a,b) dnorm(x, a, b, log = TRUE)
 estimate_mle(log_l, sim_data, n_param = 2, a_initial = 3, b_initial = 1)
 #> $estimate
 #>        a        b 
-#> 3.986475 1.997933 
+#> 3.945122 2.223727 
 #> 
 #> $log_likelihood
-#> [1] -105.5594
+#> [1] -110.9108
 
 # Estimate 95% CI based on profile likelihood
 calculate_profile(
@@ -78,11 +75,11 @@ calculate_profile(
 )
 #> $estimate
 #>        a        b 
-#> 3.986475 1.997933 
+#> 3.945122 2.223727 
 #> 
 #> $profile_out
 #>       a1       a2       b1       b2 
-#> 3.418503 4.548503 1.660782 2.469944
+#> 3.317470 4.577470 1.848473 2.749082
 ```
 
 Additionally, multiple distribution models can be compared (for censored
@@ -95,9 +92,9 @@ multi_fitdist(
   func = fitdistrplus::fitdist
 )
 #>    models    loglik      aic      bic
-#> 1   gamma -238.2154 480.4309 485.6412
-#> 2   lnorm -238.2519 480.5038 485.7142
-#> 3 weibull -239.2969 482.5937 487.8041
+#> 1   gamma -237.0588 478.1176 483.3280
+#> 2 weibull -237.7660 479.5321 484.7424
+#> 3   lnorm -240.0550 484.1099 489.3203
 ```
 
 ## Help
