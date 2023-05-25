@@ -38,37 +38,7 @@ You can install the development version of quickfit from
 ``` r
 # check whether {pak} is installed
 if(!require("pak")) install.packages("pak")
-#> Loading required package: pak
 pak::pak("epiverse-trace/quickfit")
-#> ℹ Loading metadata database
-#> ℹ Loading metadata database
-#> ✔ Loading metadata database ... done
-#> ✔ Loading metadata database ... done
-#> 
-#>  
-#> 
-#> → Will update 1 package.
-#> → Will update 1 package.
-#> → The package (0 B) is cached.
-#> → The package (0 B) is cached.
-#> + quickfit 0.0.0.9000 → 0.0.0.9000 👷🏿‍♀️🔧 (GitHub: 5d11e96)
-#> + quickfit 0.0.0.9000 → 0.0.0.9000 👷🏿‍♀️🔧 (GitHub: 5d11e96)
-#> ℹ No downloads are needed, 1 pkg is cached
-#> ℹ No downloads are needed, 1 pkg is cached
-#> ✔ Got quickfit 0.0.0.9000 (source) (27.92 kB)
-#> ✔ Got quickfit 0.0.0.9000 (source) (27.92 kB)
-#> ℹ Packaging quickfit 0.0.0.9000
-#> ℹ Packaging quickfit 0.0.0.9000
-#> ✔ Packaged quickfit 0.0.0.9000 (567ms)
-#> ✔ Packaged quickfit 0.0.0.9000 (567ms)
-#> ℹ Building quickfit 0.0.0.9000
-#> ℹ Building quickfit 0.0.0.9000
-#> ✔ Built quickfit 0.0.0.9000 (1.4s)
-#> ✔ Built quickfit 0.0.0.9000 (1.4s)
-#> ✔ Installed quickfit 0.0.0.9000 (github::epiverse-trace/quickfit@5d11e96) (41ms)
-#> ✔ Installed quickfit 0.0.0.9000 (github::epiverse-trace/quickfit@5d11e96) (41ms)
-#> ✔ 1 pkg + 12 deps: kept 10, upd 1, dld 1 (NA B) [14.6s]
-#> ✔ 1 pkg + 12 deps: kept 10, upd 1, dld 1 (NA B) [14.6s]
 ```
 
 ## Quick start
@@ -92,10 +62,10 @@ log_l <- function(x,a,b) dnorm(x, a, b, log = TRUE)
 estimate_mle(log_l, sim_data, n_param = 2, a_initial = 3, b_initial = 1)
 #> $estimate
 #>        a        b 
-#> 4.103950 1.838315 
+#> 3.986475 1.997933 
 #> 
 #> $log_likelihood
-#> [1] -101.392
+#> [1] -105.5594
 
 # Estimate 95% CI based on profile likelihood
 calculate_profile(
@@ -108,11 +78,11 @@ calculate_profile(
 )
 #> $estimate
 #>        a        b 
-#> 4.103950 1.838315 
+#> 3.986475 1.997933 
 #> 
 #> $profile_out
 #>       a1       a2       b1       b2 
-#> 3.588357 4.628357 1.528099 2.272617
+#> 3.418503 4.548503 1.660782 2.469944
 ```
 
 Additionally, multiple distribution models can be compared (for censored
@@ -121,12 +91,13 @@ and non-censored data).
 ``` r
 multi_fitdist(
   data = rlnorm(n = 100, meanlog = 1, sdlog = 1), 
-  models = c("lnorm", "gamma", "weibull")
+  models = c("lnorm", "gamma", "weibull"), 
+  func = fitdistrplus::fitdist
 )
 #>    models    loglik      aic      bic
-#> 1   lnorm -264.0081 532.0161 537.2265
-#> 2 weibull -272.9079 549.8158 555.0262
-#> 3   gamma -272.9284 549.8568 555.0672
+#> 1   gamma -238.2154 480.4309 485.6412
+#> 2   lnorm -238.2519 480.5038 485.7142
+#> 3 weibull -239.2969 482.5937 487.8041
 ```
 
 ## Help
