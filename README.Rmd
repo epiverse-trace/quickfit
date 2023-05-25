@@ -84,7 +84,8 @@ non-censored data).
 ```{r}
 multi_fitdist(
   data = rlnorm(n = 100, meanlog = 1, sdlog = 1), 
-  models = c("lnorm", "gamma", "weibull")
+  models = c("lnorm", "gamma", "weibull"), 
+  func = fitdistrplus::fitdist
 )
 ```
 
