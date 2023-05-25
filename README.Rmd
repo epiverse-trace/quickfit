@@ -41,7 +41,7 @@ via maximum likelihood
 You can install the development version of {{ packagename }} from
 [GitHub](https://github.com/) with:
 
-```{r}
+``` r
 # check whether {pak} is installed
 if(!require("pak")) install.packages("pak")
 pak::pak("epiverse-trace/quickfit")
