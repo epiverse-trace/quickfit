@@ -1,9 +1,10 @@
 #' Helper function to call a fitting function across different models
 #'
-#' @description This is a utility function that allows comparing different model fits to a single dataset. It does this by executing a specified function on
-#' the data provided and over all models specified. The function then organises
-#' the output and calculates the AIC and BIC and ranks the output by model fit
-#' , determined by the `rank_by` argument.
+#' @description This is a utility function that allows comparing different
+#' model fits to a single dataset. It does this by executing a specified
+#' function on the data provided and over all models specified. The function
+#' then organises the output and calculates the AIC and BIC and ranks the
+#' output by model fit determined by the `rank_by` argument.
 #'
 #' @details The vector of models given in the `models` argument needs to be
 #' named with the name of the model argument supplied to `func` when it
@@ -20,11 +21,13 @@
 #' should match those required by the function specified in the `func` argument.
 #' The vector of models should be named with the name of the model argument
 #' from that specified in `func` when the argument is not second. See details.
-#' @param func A function (`closure`) used to fit the models. Could be user-defined or specified from another package's namespace.
+#' @param func A function (`closure`) used to fit the models. Could be
+#' user-defined or specified from another package's namespace.
 #' @param rank_by A character string, either "loglik", "aic" or "bic" to rank
 #' the order of the output data frame. Default is "aic".
 #'
-#' @return A data frame containing the models and associated loglikelihood, aic, and bic. 
+#' @return A data frame containing the models and associated
+#' loglikelihood, aic, and bic.
 #' @export
 #'
 #' @examples
@@ -35,8 +38,10 @@
 #'   func = fitdistrplus::fitdist
 #' )
 #'
-#' # Where the model is not the second argument in the function specified, the models have to be named according to what they are called in the original function.
-#' # argument of the function input. Here, `distr` is the name required in `fitdistrplus::fitdist()`
+#' # Where the model is not the second argument in the function specified,
+#' # the models have to be named according to what they are called in the
+#' # original function. argument of the function input. Here, `distr` is the
+#' # name required in `fitdistrplus::fitdist()`
 #' multi_fitdist(
 #'   data = rgamma(n = 100, shape = 1, scale = 1),
 #'   models = c(distr = "gamma", distr = "weibull", distr = "lnorm"),
@@ -76,7 +81,7 @@ multi_fitdist <- function(data,
   )
 
   # check whether the list contains s3 or s4 objects
- is_res_s4 <- all(vapply(res, isS4, FUN.VALUE = logical(1))
+ is_res_s4 <- all(vapply(res, isS4, FUN.VALUE = logical(1)))
 
   name_accessor <- ifelse(
     test = is_res_s4,
@@ -87,7 +92,11 @@ multi_fitdist <- function(data,
 
   # check if function output contains loglikelihood
   res_names <- lapply(res, name_accessor)
-  has_loglik <- vapply(res_names, function(x) "loglik" %in% x, FUN.VALUE = logical(1))
+  has_loglik <- vapply(
+    res_names,
+    function(x) "loglik" %in% x,
+    FUN.VALUE = logical(1)
+  )
 
   # extract loglikelihood
   if (all(has_loglik)) {

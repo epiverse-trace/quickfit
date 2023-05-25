@@ -14,30 +14,33 @@ function specified in \code{func} argument.}
 specifying the names of the candidate models. The naming of the models
 should match those required by the function specified in the \code{func} argument.
 The vector of models should be named with the name of the model argument
-from the input function when the argument is not second. See details.}
+from that specified in \code{func} when the argument is not second. See details.}
 
-\item{func}{A function (\code{closure}) used to fit the models.}
+\item{func}{A function (\code{closure}) used to fit the models. Could be
+user-defined or specified from another package's namespace.}
 
 \item{rank_by}{A character string, either "loglik", "aic" or "bic" to rank
 the order of the output data frame. Default is "aic".}
 }
 \value{
-A data frame of all models
+A data frame containing the models and associated
+loglikelihood, aic, and bic.
 }
 \description{
-This is a utility function which executes a function provided on
-the data provided and over all models specified. The function then organises
-the output and calculates the AIC and BIC and ranks the output by model fit
-which is determined by the \code{rank_by} argument.
+This is a utility function that allows comparing different
+model fits to a single dataset. It does this by executing a specified
+function on the data provided and over all models specified. The function
+then organises the output and calculates the AIC and BIC and ranks the
+output by model fit determined by the \code{rank_by} argument.
 }
 \details{
 The vector of models given in the \code{models} argument needs to be
-named with the name of the model argument in the supplied function when it
+named with the name of the model argument supplied to \code{func} when it
 is not the second argument in that function. All elements of the vector need
 to be named, see example.
 
 The data is assumed to always be the first argument of the function supplied
-in \code{func}, \code{multi_fitdist()} will not work correct if this is not the case.
+in \code{func}, \code{multi_fitdist()} will not work correctly if this is not the case.
 }
 \examples{
 \dontrun{
@@ -47,8 +50,10 @@ multi_fitdist(
   func = fitdistrplus::fitdist
 )
 
-# example where the models are named for when the model is not the second
-# argument of the function input
+# Where the model is not the second argument in the function specified,
+# the models have to be named according to what they are called in the
+# original function. argument of the function input. Here, `distr` is the
+# name required in `fitdistrplus::fitdist()`
 multi_fitdist(
   data = rgamma(n = 100, shape = 1, scale = 1),
   models = c(distr = "gamma", distr = "weibull", distr = "lnorm"),
