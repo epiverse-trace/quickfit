@@ -20,9 +20,6 @@ knitr::opts_chunk$set(
 
 # {{ packagename }}
 
-{{ packagename }} provides functions to estimate one and two parameter functions
-via maximum likelihood
-
 <!-- badges: start -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![R-CMD-check](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml)
