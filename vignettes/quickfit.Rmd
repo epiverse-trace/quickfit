@@ -1,0 +1,166 @@
+---
+title: "Getting started with {quickfit}"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with {quickfit}}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The {quickfit} package contains helper functions that can be applied in a
+variety of model fitting tasks. It is primarily developed as a tool to centralise
+the common fitting tasks and methodologies used in Epiverse-TRACE R packages. 
+
+Due to {quickfit} being a general purpose package it does not have any specific 
+use cases and here we give examples of where it can be applied in understanding
+disease transmission and superspreading.
+
+## Transmission and Superspreading
+
+Individual-level transmission variation, which can cause superspreading events,
+has been studied by fitting distributions to the contact data
+from outbreaks. Overdispersion (i.e. variance exceeds the mean) in transmission
+chain data is a signature of superspreading and can be shown by estimating
+the dispersion parameter of the negative binomial distribution. Conversely, in
+the case that there is no superspreading, a poisson or geometric distribution
+may adequately fit the transmission data.
+
+```{r setup}
+library(quickfit)
+library(bpmodels)
+library(superspreading)
+library(ggplot2)
+library(scales)
+```
+
+We simulate a hypothetical outbreak under a poisson distribution (i.e. no
+superspreading).
+
+```{r}
+cluster_sizes <- rpois(n = 50, lambda = 2)
+```
+
+Exploring the data we can see that as expected, under a poisson model the data
+is not very dispersed.
+
+```{r, fig.height=5, fig.width=8}
+ggplot2::ggplot(data = data.frame(cs = cluster_sizes)) +
+  ggplot2::geom_histogram(
+    mapping = ggplot2::aes(cs), 
+    binwidth = 1, 
+    fill = "darkgreen", 
+    colour = "white"
+  ) +
+  ggplot2::theme_classic() +
+  ggplot2::scale_x_continuous(
+    name = "Cluster size", 
+    breaks = breaks_pretty()
+  )
+```
+
+Here we fit a range of distributions by maximum likelihood to estimate the 
+parameters of the offspring distribution.
+
+Next we wrap the log-likelihood function of interest in a function for it to
+be passed to `quickfit`.
+
+```{r}
+nbinom_log_l <- function(x, a, b) {
+  bpmodels::chain_ll(
+    x = x, 
+    offspring = "nbinom", 
+    stat = "size",
+    mu = a,
+    size = b
+  ) 
+}
+```
+
+The maximum likelihood estimates for the negative binomial model.
+
+```{r}
+estimate_mle(
+  log_likelihood = nbinom_log_l, 
+  data_in = cluster_sizes, 
+  n_param = 2,
+  a_initial = 0.5, 
+  b_initial = 0.5
+)
+```
+
+The estimates and 95% confidence interval output by `calculate_profile()` are 
+the negative binomial as we rename them R and k. R is the mean 
+reproductive number of the outbreak and k is the dispersion parameter. The 
+higher R value, the faster the pace of the outbreak, the lower the value of k
+the higher the dispersion, in other words, more superspreading.
+
+```{r}
+res <- calculate_profile(
+  log_likelihood = nbinom_log_l,
+  data_in = cluster_sizes,
+  n_param = 2,
+  a_initial = 0.5,
+  b_initial = 1,
+  precision = 0.01
+)
+names(res$estimate) <- c("R", "k")
+names(res$profile_out) <- c(
+  "R_lower_CI", "R_upper_CI", "k_lower_CI", "k_upper_CI"
+)
+res
+```
+
+Now if we simulate the infection data using a negative binomial. We use the 
+function `rnbimon_mean_disp()` from the package `bpmodels` to parameterise 
+the distribution using the mean (R) and the dispersion (k) (this is the common
+parameterisation in epidemiology).
+
+```{r}
+#TODO: check why chains_ll cannot accept zero in cluster sizes
+cluster_sizes <- bpmodels::rnbinom_mean_disp(n = 50, mn = 1, disp = 4)
+cluster_sizes <- cluster_sizes[-which(cluster_sizes == 0)]
+
+ggplot2::ggplot(data = data.frame(cs = cluster_sizes)) +
+  ggplot2::geom_histogram(
+    mapping = ggplot2::aes(cs), 
+    binwidth = 1, 
+    fill = "darkgreen", 
+    colour = "white"
+  ) +
+  ggplot2::theme_classic() +
+  ggplot2::scale_x_continuous(
+    name = "Cluster size", 
+    breaks = breaks_pretty()
+  )
+
+res <- calculate_profile(
+  log_likelihood = nbinom_log_l,
+  data_in = cluster_sizes,
+  n_param = 2,
+  a_initial = 0.5,
+  b_initial = 1,
+  precision = 0.01
+)
+names(res$estimate) <- c("R", "k")
+names(res$profile_out) <- c(
+  "R_lower_CI", "R_upper_CI", "k_lower_CI", "k_upper_CI"
+)
+res
+```
+
+Now that we have the values of R and k estimated we can calculate the 
+probability that the disease will become endemic (i.e. sustained community
+transmission and not go to extinction), using the `superspreading` R package.
+
+```{r}
+probability_epidemic(R = res$estimate[["R"]], k = res$estimate[["k"]], a = 1)
+```
+
+
