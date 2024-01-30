@@ -67,12 +67,12 @@ estimate_mle <- function(log_likelihood,
   # Two parameter model
   if (n_param == 2) {
     # Format for optimisation
-    optim_likelihood <- function(theta) {
+    optim_likelihood <- function(data_in, theta) {
       -sum(log_likelihood(data_in, as.numeric(theta[1]), as.numeric(theta[2])))
     }
 
     # Run optimisation and return
-    mle <- stats::optim(c(a = a_initial, b = b_initial), optim_likelihood)
+    mle <- stats::optim(c(a = a_initial, b = b_initial), optim_likelihood, data_in = data_in)
   }
 
   # Output estimates and likelihood
