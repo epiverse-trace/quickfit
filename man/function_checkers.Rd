@@ -2,27 +2,27 @@
 % Please edit documentation in R/function_checkers.R
 \name{function_checkers}
 \alias{function_checkers}
-\alias{test_fn_req_args}
-\alias{test_fn_num_out}
+\alias{test_func_req_args}
+\alias{test_func_num_out}
 \title{Check functions passed to exported functions}
 \usage{
-test_fn_req_args(fn, n_req_args = 1)
+test_func_req_args(func, n_req_args = 1)
 
-test_fn_num_out(fn, n = 10)
+test_func_num_out(func, n = 10)
 }
 \arguments{
-\item{fn}{A function. This is expected to be a function evaluating the
+\item{func}{A function. This is expected to be a function evaluating the
 density of a distribution at numeric values.}
 
 \item{n_req_args}{The number of required arguments, i.e., arguments without
 default values.}
 
-\item{n}{The number of elements over which to evaluate the function \code{fn}.
-Defaults to 10, and \code{fn} is evaluated over \code{seq(n)}.}
+\item{n}{The number of elements over which to evaluate the function \code{func}.
+Defaults to 10, and \code{func} is evaluated over \code{seq(n)}.}
 }
 \value{
-A logical for whether the function \code{fn} fulfils conditions specified
-in the respective checks.
+A logical for whether the function \code{func} fulfils conditions
+specified in the respective checks.
 }
 \description{
 Internal helper function that check whether a function passed as
