@@ -30,3 +30,48 @@ test_that(".fit fails as expected", {
     regexp = "Arguments supplied in `...` not valid"
   )
 })
+
+test_that("ic_tbl works as expected", {
+  skip_if_not_installed(pkg = "fitdistrplus")
+  set.seed(1)
+  cases <- rnbinom(n = 100, mu = 5, size = 0.7)
+  pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
+  geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
+  nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
+  expect_snapshot(ic_tbl(pois_fit, geom_fit, nbinom_fit))
+})
+
+test_that("ic_tbl works as expected with sort_by = BIC", {
+  skip_if_not_installed(pkg = "fitdistrplus")
+  set.seed(1)
+  cases <- rnbinom(n = 100, mu = 5, size = 0.7)
+  pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
+  geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
+  nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
+  expect_snapshot(ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "BIC"))
+})
+
+test_that("ic_tbl works as expected with sort_by = none", {
+  skip_if_not_installed(pkg = "fitdistrplus")
+  set.seed(1)
+  cases <- rnbinom(n = 100, mu = 5, size = 0.7)
+  pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
+  geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
+  nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
+  expect_snapshot(ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "none"))
+})
+
+test_that("ic_tbl fails as expected", {
+  skip_if_not_installed(pkg = "fitdistrplus")
+  cases <- rnbinom(n = 100, mu = 5, size = 0.7)
+  pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
+  geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
+  nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
+  expect_error(
+    ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "WIC"),
+    regexp = "(arg)*(should be one of)*(AIC)*(BIC)"
+  )
+
+  pois_fit <- unclass(pois_fit)
+  expect_error(ic_tbl(pois_fit), regexp = "Input objects must be <fitdist>")
+})
