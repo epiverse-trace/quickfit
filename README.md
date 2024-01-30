@@ -5,7 +5,7 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# quickfit
+# *quickfit*: Toolbox of model fitting helper functions <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
 
@@ -59,10 +59,10 @@ log_l <- function(x,a,b) dnorm(x, a, b, log = TRUE)
 estimate_mle(log_l, sim_data, n_param = 2, a_initial = 3, b_initial = 1)
 #> $estimate
 #>        a        b 
-#> 3.945122 2.223727 
+#> 4.204772 1.773176 
 #> 
 #> $log_likelihood
-#> [1] -110.9108
+#> [1] -99.58476
 
 # Estimate 95% CI based on profile likelihood
 calculate_profile(
@@ -75,11 +75,11 @@ calculate_profile(
 )
 #> $estimate
 #>        a        b 
-#> 3.945122 2.223727 
+#> 4.204772 1.773176 
 #> 
 #> $profile_out
 #>       a1       a2       b1       b2 
-#> 3.317470 4.577470 1.848473 2.749082
+#> 3.704056 4.704056 1.473952 2.192089
 ```
 
 Additionally, multiple distribution models can be compared (for censored
@@ -92,9 +92,9 @@ multi_fitdist(
   func = fitdistrplus::fitdist
 )
 #>    models    loglik      aic      bic
-#> 1   gamma -237.0588 478.1176 483.3280
-#> 2 weibull -237.7660 479.5321 484.7424
-#> 3   lnorm -240.0550 484.1099 489.3203
+#> 1   lnorm -251.9424 507.8847 513.0951
+#> 2   gamma -258.6308 521.2616 526.4719
+#> 3 weibull -259.7064 523.4128 528.6231
 ```
 
 ## Help
