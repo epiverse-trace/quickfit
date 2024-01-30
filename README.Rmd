@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# {{ packagename }}
+# _quickfit_: Toolbox of model fitting helper functions <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
