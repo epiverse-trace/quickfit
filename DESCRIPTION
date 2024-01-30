@@ -19,7 +19,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
     methods,
-    stats
+    stats,
+    rlang
 Suggests: 
     coarseDataTools,
     fitdistrplus,
