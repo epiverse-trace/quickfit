@@ -9,7 +9,9 @@ Authors@R: c(
     person(given = "Adam", 
            family = "Kucharski", 
            email = "adam.kucharski@lshtm.ac.uk", 
-           role = c("aut")))
+           role = c("aut")),
+    person("Pratik", "Gupte", , "pratik.gupte@lshtm.ac.uk", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "https://orcid.org/0000-0001-5294-7819")))
 Description: Model fitting utilities package for Epiverse-TRACE.
 License: MIT + file LICENSE
 URL: https://github.com/epiverse-trace/quickfit
