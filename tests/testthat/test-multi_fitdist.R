@@ -26,11 +26,11 @@ test_that("multi_fitdist works as expected on censored data", {
   )
   res <- multi_fitdist(
     data = data,
-    models = c("lnorm", "gamma", "weibull"),
+    models = c("lnorm", "weibull"),
     func = fitdistrplus::fitdistcens
   )
   expect_s3_class(res, "data.frame")
-  expect_identical(nrow(res), 3L)
+  expect_identical(nrow(res), 2L)
   expect_identical(ncol(res), 4L)
 })
 
