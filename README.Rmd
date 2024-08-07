@@ -24,13 +24,15 @@ knitr::opts_chunk$set(
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![R-CMD-check](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/{{ gh_repo }}/branch/main/graph/badge.svg)](https://app.codecov.io/gh/{{ gh_repo }}?branch=main)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Project Status: Suspended – Initial development has started, but there has not yet been a stable, usable release; work has been stopped for the time being but the author(s) intend on resuming work.](https://www.repostatus.org/badges/latest/suspended.svg)](https://www.repostatus.org/#suspended)
 <!-- badges: end -->
 
 
-`{quickfit}` is an `R` package to help with simple model fitting tasks in epidemiology.
+`{quickfit}` was intended to be an `R` package to help with simple model fitting tasks in epidemiology and as a central place to store helper functions used in Epiverse-TRACE.
 
-`{quickfit}` is developed at the [Centre for the Mathematical Modelling of Infectious Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases) at the London School of Hygiene and Tropical Medicine as part of the [Epiverse Initiative](https://data.org/initiatives/epiverse/).
+The development of `{quickfit}` has been **suspended** it is no longer considered necessary to have a dedicated package within Epiverse-TRACE to conduct model fitting, and helper functions will remain in the package they were developed in and shared/copied directly across packages rather than requiring taking on a dependency to import them. Development may resume if the need for a utility package becomes apparent.
+
+`{quickfit}` was developed at the [Centre for the Mathematical Modelling of Infectious Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases) at the London School of Hygiene and Tropical Medicine as part of the [Epiverse Initiative](https://data.org/initiatives/epiverse/).
 
 
 ## Installation
@@ -45,6 +47,8 @@ pak::pak("epiverse-trace/quickfit")
 ```
 
 ## Quick start
+
+**The examples below show the existing functionality; this is not currently planned to be developed further.**
 
 These examples illustrate some of the current functionalities:
 
@@ -88,11 +92,15 @@ multi_fitdist(
 
 ## Help 
 
-To report a bug please open an [issue](https://github.com/epiverse-trace/quickfit/issues/new/choose)
+To report a bug please open an [issue](https://github.com/epiverse-trace/quickfit/issues/new/choose); please note that development on `{quickfit}` has been suspended, therefore it is not guaranteed that all issues will be responded to. 
 
 ### Contributions
 
 Contributions are welcome via [pull requests](https://github.com/{{ gh_repo }}/pulls).
+
+Development on `{quickfit}` has been suspended.
+
+However, if you think this package could be developed for a specific use case then contributions are very welcome as issues, or on the main [Epiverse Discussion board](https://github.com/orgs/epiverse-trace/discussions).
 
 ### Code of Conduct
 
