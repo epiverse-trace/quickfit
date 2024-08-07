@@ -14,14 +14,25 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 [![R-CMD-check](https://github.com/epiverse-trace/quickfit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/quickfit/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/epiverse-trace/quickfit/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/quickfit?branch=main)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Project Status: Suspended – Initial development has started, but
+there has not yet been a stable, usable release; work has been stopped
+for the time being but the author(s) intend on resuming
+work.](https://www.repostatus.org/badges/latest/suspended.svg)](https://www.repostatus.org/#suspended)
 <!-- badges: end -->
 
-`{quickfit}` is an `R` package to help with simple model fitting tasks
-in epidemiology.
+`{quickfit}` was intended to be an `R` package to help with simple model
+fitting tasks in epidemiology and as a central place to store helper
+functions used in Epiverse-TRACE.
 
-`{quickfit}` is developed at the [Centre for the Mathematical Modelling
+The development of `{quickfit}` has been **suspended** it is no longer
+considered necessary to have a dedicated package within Epiverse-TRACE
+to conduct model fitting, and helper functions will remain in the
+package they were developed in and shared/copied directly across
+packages rather than requiring taking on a dependency to import them.
+Development may resume if the need for a utility package becomes
+apparent.
+
+`{quickfit}` was developed at the [Centre for the Mathematical Modelling
 of Infectious
 Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases)
 at the London School of Hygiene and Tropical Medicine as part of the
@@ -39,6 +50,9 @@ pak::pak("epiverse-trace/quickfit")
 ```
 
 ## Quick start
+
+**The examples below show the existing functionality; this is not
+currently planned to be developed further.**
 
 These examples illustrate some of the current functionalities:
 
@@ -59,10 +73,10 @@ log_l <- function(x,a,b) dnorm(x, a, b, log = TRUE)
 estimate_mle(log_l, sim_data, n_param = 2, a_initial = 3, b_initial = 1)
 #> $estimate
 #>        a        b 
-#> 3.714371 2.004835 
+#> 3.996152 2.029174 
 #> 
 #> $log_likelihood
-#> [1] -105.7232
+#> [1] -106.3236
 
 # Estimate 95% CI based on profile likelihood
 calculate_profile(
@@ -75,11 +89,11 @@ calculate_profile(
 )
 #> $estimate
 #>        a        b 
-#> 3.714371 2.004835 
+#> 3.996152 2.029174 
 #> 
 #> $profile_out
 #>       a1       a2       b1       b2 
-#> 3.148638 4.278638 1.666519 2.478478
+#> 3.426729 4.566729 1.686751 2.508567
 ```
 
 Additionally, multiple distribution models can be compared (for censored
@@ -92,20 +106,29 @@ multi_fitdist(
   func = fitdistrplus::fitdist
 )
 #>    models    loglik      aic      bic
-#> 1   lnorm -249.6691 503.3383 508.5486
-#> 2   gamma -257.1216 518.2432 523.4535
-#> 3 weibull -257.6768 519.3536 524.5639
+#> 1   lnorm -244.8528 493.7056 498.9159
+#> 2 weibull -252.4967 508.9933 514.2037
+#> 3   gamma -254.0602 512.1204 517.3308
 ```
 
 ## Help
 
 To report a bug please open an
-[issue](https://github.com/epiverse-trace/quickfit/issues/new/choose)
+[issue](https://github.com/epiverse-trace/quickfit/issues/new/choose);
+please note that development on `{quickfit}` has been suspended,
+therefore it is not guaranteed that all issues will be responded to.
 
 ### Contributions
 
 Contributions are welcome via [pull
 requests](https://github.com/epiverse-trace/quickfit/pulls).
+
+Development on `{quickfit}` has been suspended.
+
+However, if you think this package could be developed for a specific use
+case then contributions are very welcome as issues, or on the main
+[Epiverse Discussion
+board](https://github.com/orgs/epiverse-trace/discussions).
 
 ### Code of Conduct
 
