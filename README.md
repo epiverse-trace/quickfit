@@ -59,10 +59,10 @@ log_l <- function(x,a,b) dnorm(x, a, b, log = TRUE)
 estimate_mle(log_l, sim_data, n_param = 2, a_initial = 3, b_initial = 1)
 #> $estimate
 #>        a        b 
-#> 4.204772 1.773176 
+#> 3.714371 2.004835 
 #> 
 #> $log_likelihood
-#> [1] -99.58476
+#> [1] -105.7232
 
 # Estimate 95% CI based on profile likelihood
 calculate_profile(
@@ -75,11 +75,11 @@ calculate_profile(
 )
 #> $estimate
 #>        a        b 
-#> 4.204772 1.773176 
+#> 3.714371 2.004835 
 #> 
 #> $profile_out
 #>       a1       a2       b1       b2 
-#> 3.704056 4.704056 1.473952 2.192089
+#> 3.148638 4.278638 1.666519 2.478478
 ```
 
 Additionally, multiple distribution models can be compared (for censored
@@ -92,9 +92,9 @@ multi_fitdist(
   func = fitdistrplus::fitdist
 )
 #>    models    loglik      aic      bic
-#> 1   lnorm -251.9424 507.8847 513.0951
-#> 2   gamma -258.6308 521.2616 526.4719
-#> 3 weibull -259.7064 523.4128 528.6231
+#> 1   lnorm -249.6691 503.3383 508.5486
+#> 2   gamma -257.1216 518.2432 523.4535
+#> 3 weibull -257.6768 519.3536 524.5639
 ```
 
 ## Help
